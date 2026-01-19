@@ -1,9 +1,102 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Verification</title>
-  </head>
-  <body>
-    <a rel="me" href="https://mas.to/@kdv">Mastodon</a>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolja De Vitis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #3939C1;
+            color: #7C71DA;
+            font-family: 'Courier New', 'Courier', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            border: 4px solid #7C71DA;
+            padding: 40px 60px;
+            background-color: #3939C1;
+            box-shadow: 0 0 0 4px #3939C1, 0 0 0 8px #7C71DA;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #2929A1;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        a {
+            color: #7C71DA;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: 2px solid #7C71DA;
+            background-color: #2929A1;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+        }
+
+        a:hover {
+            background-color: #7C71DA;
+            color: #3939C1;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 20px;
+            background-color: #7C71DA;
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 40px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            a {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kolja De Vitis<span class="cursor"></span></h1>
+
+        <div class="links">
+            <a href="https://x.com/devitis" target="_blank" rel="noopener">→ X Profile</a>
+            <a rel="me" href="https://mas.to/@kdv" target="_blank">→ Mastodon</a>
+        </div>
+    </div>
+</body>
 </html>
