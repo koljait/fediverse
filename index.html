@@ -32,9 +32,29 @@
             text-align: center;
         }
 
+        .avatar-wrapper {
+            display: inline-block;
+            margin-bottom: 32px;
+        }
+
+        .avatar-label {
+            font-size: 0.75em;
+            letter-spacing: 2px;
+            color: #39FF14;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        canvas {
+            display: block;
+            image-rendering: pixelated;
+            border: 2px solid #39FF14;
+            box-shadow: 0 0 12px #39FF14, 0 0 28px #39FF1444;
+        }
+
         h1 {
             font-size: 2.5em;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             letter-spacing: 2px;
             text-shadow: 2px 2px #2929A1;
         }
@@ -69,6 +89,7 @@
             background-color: #7C71DA;
             animation: blink 1s infinite;
             margin-left: 5px;
+            vertical-align: middle;
         }
 
         @keyframes blink {
@@ -78,10 +99,10 @@
 
         @media (max-width: 600px) {
             .container {
-                padding: 30px 40px;
+                padding: 30px 24px;
             }
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
             a {
                 font-size: 1em;
@@ -91,12 +112,62 @@
 </head>
 <body>
     <div class="container">
+
+        <div class="avatar-wrapper">
+            <canvas id="avatar" width="160" height="160"></canvas>
+            <div class="avatar-label">KOLJA.BMP</div>
+        </div>
+
         <h1>Kolja De Vitis<span class="cursor"></span></h1>
 
         <div class="links">
             <a href="https://x.com/devitis" target="_blank" rel="noopener">→ X Profile</a>
             <a rel="me" href="https://mas.to/@kdv" target="_blank">→ Mastodon</a>
         </div>
+
     </div>
+
+    <script>
+        const SCALE = 10;
+        const ON  = '#39FF14';  // neon green
+        const OFF = '#000000';  // black
+
+        // 16x16 pixel face — 1 = lit, 0 = dark
+        const face = [
+          [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+          [0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0],
+          [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+          [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+          [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+          [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+          [1,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1],  // eyes
+          [1,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1],  // eyes
+          [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+          [1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1],  // nose
+          [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+          [1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1],  // mouth corners
+          [1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1],  // smile
+          [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+          [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+          [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        ];
+
+        const canvas = document.getElementById('avatar');
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = OFF;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // glow pass (draw larger semi-transparent pixels underneath)
+        ctx.shadowColor = ON;
+        ctx.shadowBlur = 6;
+
+        face.forEach((row, y) => {
+            row.forEach((pixel, x) => {
+                ctx.fillStyle = pixel ? ON : OFF;
+                ctx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+            });
+        });
+    </script>
 </body>
 </html>
